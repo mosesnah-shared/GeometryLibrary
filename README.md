@@ -1,2 +1,2 @@
 # GeometryLibrary
-Library for Methods for Differential Geometry
+Library for Differential Geometry
