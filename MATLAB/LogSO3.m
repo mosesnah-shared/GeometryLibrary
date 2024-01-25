@@ -7,6 +7,7 @@ function so3 = LogSO3( R )
 % Parameters
 % ----------
 %   (1) R: An SO3 matrix
+%   (2) ths: Threshold
 % 
 % Returns
 % -------
@@ -17,13 +18,13 @@ function so3 = LogSO3( R )
 assert( is_SO3( R ) );
 
 % First, need to check whether 
-assert( abs( trace( R ) + 1 ) >= 1e-5 );
+assert( abs( trace( R ) + 1 ) >= eps );
 theta = acos( 0.5 * ( trace( R ) - 1 ) );
 
-if theta <= 1e-3
+if theta <= eps
     so3 = zeros( 3, 3 );
 else
-    so3 = 1/( 2 * sin( theta ) ) * ( R - R' );
+    so3 = theta/( 2 * sin( theta ) ) * ( R - R' );
 end
 
 end
