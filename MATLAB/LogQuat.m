@@ -24,7 +24,7 @@ qv = quat_imag( quat );
     
 % If qv is zero, then simply zero vector 
 % nothing to change
-if norm( qv ) >= 1e-6;
+if norm( qv ) >= eps;
     quat_new( 2:4 ) = acos( qw ) * qv/norm( qv );
 end
 

@@ -24,16 +24,18 @@ if abs( trace( R ) + 1 ) >= eps
     if theta <= eps
         so3 = zeros( 3, 3 );
     else
-        so3 = 1/( 2 * sin( theta ) ) * ( R - R' );
+        so3 = theta/( 2 * sin( theta ) ) * ( R - R' );
     end
 
 else
     % Check if there is a plaussible solution
     if ( R( 3, 3 )+1 >= eps )
-        R3_to_so3( 1/sqrt( 2*( 1 + R( 3, 3 ) ) )*[ R( 1, 3 ), R( 2, 3 ), R( 3, 3 ) + 1 ] )
+        so3 = pi * R3_to_so3( 1/sqrt( 2*( 1 + R( 3, 3 ) ) )*[ R( 1, 3 ), R( 2, 3 ), R( 3, 3 ) + 1 ] );
+
     elseif ( R( 2, 2 )+1 >= eps )
-        R3_to_so3( 1/sqrt( 2*( 1 + R( 2, 2 ) ) )*[ R( 1, 2 ), 1 + R( 2, 2 ), R( 3, 2 ) ] )
+        so3 = pi * R3_to_so3( 1/sqrt( 2*( 1 + R( 2, 2 ) ) )*[ R( 1, 2 ), 1 + R( 2, 2 ), R( 3, 2 ) ] );
+        
     else
-        R3_to_so3( 1/sqrt( 2*( 1 + R( 1, 1 ) ) )*[ 1 + R( 1, 1 ), R( 2, 1 ), R( 3, 1 ) ] )
+        so3 = pi * R3_to_so3( 1/sqrt( 2*( 1 + R( 1, 1 ) ) )*[ 1 + R( 1, 1 ), R( 2, 1 ), R( 3, 1 ) ] );
     end
 end
